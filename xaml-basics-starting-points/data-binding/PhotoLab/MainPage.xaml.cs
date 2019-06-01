@@ -56,8 +56,8 @@ namespace PhotoLab
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                 AppViewBackButtonVisibility.Collapsed;
 
-            // Remove this when replaced with XAML bindings
-            ImageGridView.ItemsSource = Images;
+            // Replaced with XAML bindings
+            // ImageGridView.ItemsSource = Images;
 
             if (Images.Count == 0)
             {

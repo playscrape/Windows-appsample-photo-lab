@@ -67,7 +67,8 @@
                            HorizontalAlignment="Center" />
         </ItemsPanelTemplate>
 
-        <DataTemplate x:Key="ImageGridView_DefaultItemTemplate">
+        <DataTemplate x:Key="ImageGridView_DefaultItemTemplate"
+            x:DataType="local:ImageFileInfo">
             <Grid Height="200"
                   Width="200"
                   Margin="{StaticResource LargeItemMargin}">
@@ -76,24 +77,24 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Image x:Name="ItemImage" 
-                    Source="/Assets/StoreLogo.png" 
+                    Source="{x:Bind ImageSource}" 
                     Stretch="Uniform" />
                 <StackPanel Orientation="Vertical"
                             Grid.Row="1">
-                    <TextBlock Text="Placeholder"
+                    <TextBlock Text="{x:Bind ImageTitle}"
                                HorizontalAlignment="Center"
                                Style="{StaticResource SubtitleTextBlockStyle}" />
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Center">
-                        <TextBlock Text="PNG file"
+                        <TextBlock Text="{x:Bind ImageFileType}"
                                    HorizontalAlignment="Center"
                                    Style="{StaticResource CaptionTextBlockStyle}" />
-                        <TextBlock Text="50 x 50"
+                        <TextBlock Text="{x:Bind ImageDimensions}"
                                    HorizontalAlignment="Center"
                                    Style="{StaticResource CaptionTextBlockStyle}"
                                    Margin="8,0,0,0" />
                     </StackPanel>
-                    <telerikInput:RadRating Value="3"
+                    <telerikInput:RadRating Value="{x:Bind ImageRating}"
                                             IsReadOnly="True">
                         <telerikInput:RadRating.FilledIconContentTemplate>
                             <DataTemplate>
@@ -133,12 +134,16 @@
                     RelativePanel.AlignRightWithPanel="True"
                     OverflowButtonVisibility="Collapsed"
                     DefaultLabelPosition="Right">
+            <AppBarButton Icon="Delete"
+                          Label="Delete selected image"
+                          Click="{x:Bind DeleteSelectedImage}" />
             <AppBarButton Icon="Zoom"
                           Label="Zoom"
                           Flyout="{StaticResource zoomFlyout}" />
         </CommandBar>
 
         <GridView x:Name="ImageGridView"
+                  ItemsSource="{x:Bind Images}"
                   animations:ReorderGridAnimation.Duration="400"
                   Margin="0,0,0,8"
                   IsItemClickEnabled="True"
