@@ -23,6 +23,7 @@
 -->
 
 <Page x:Name="page"
+      SizeChanged="{x:Bind DetermineItemSize}"
       x:Class="PhotoLab.MainPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -69,8 +70,8 @@
 
         <DataTemplate x:Key="ImageGridView_DefaultItemTemplate"
             x:DataType="local:ImageFileInfo">
-            <Grid Height="200"
-                  Width="200"
+            <Grid Height="{Binding Value, ElementName=ZoomSlider}"
+                  Width="{Binding Value, ElementName=ZoomSlider}"
                   Margin="{StaticResource LargeItemMargin}">
                 <Grid.RowDefinitions>
                     <RowDefinition />
